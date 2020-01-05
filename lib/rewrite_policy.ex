@@ -1,5 +1,5 @@
 defmodule MRFContrib.RewritePolicy do
-  @behavior Pleroma.Web.ActivityPub.MRF
+  @behaviour Pleroma.Web.ActivityPub.MRF
 
   @impl true
   def filter(%{"type" => "Create", "object" => %{"content" => content}} = message) do
