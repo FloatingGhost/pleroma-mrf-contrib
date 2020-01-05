@@ -1,21 +1,38 @@
-# Mrfcontrib
+# MRF Contrib
 
-**TODO: Add description**
+A few contrib MRFs for Pleroma
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `mrfcontrib` to your list of dependencies in `mix.exs`:
+Add the following to your pleroma's `mix.exs`
 
 ```elixir
 def deps do
   [
-    {:mrfcontrib, "~> 0.1.0"}
+    {:mrfcontrib, git: "https://github.com/FloatingGhost/pleroma-mrf-contrib.git", tag: "v0.0.2"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/mrfcontrib](https://hexdocs.pm/mrfcontrib).
+Then run `MIX_ENV=prod mix deps.get`
 
+## Configuration 
+
+### mrf\_rewrite
+
+```elixir
+# Append MRFContrib.RewritePolicy to your policy list
+config :pleroma, :instance,
+  rewrite_policy: [MRFContrib.RewritePolicy]
+
+config :pleroma, :mrf_rewrite,
+    rules: [
+        {"replaceme", "replace with me"},
+        {~r/[Rr]egex replace/, "replace with me"},
+        {:invidious, "https://invidio.us"}
+    ]
+```
+
+So basically your list of rules should consist of a list of tuples of the form illustrated above.
+There are a few special rules you can invoke, the only one currently implemented is `:invidious`
+which will rewrite youtube URLs to the specified invidious instance.
