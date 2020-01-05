@@ -21,7 +21,6 @@ defmodule MRFContrib.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:pleroma, git: "https://git.pleroma.social/pleroma/pleroma.git", branch: "develop"}
     ]
   end
 end
