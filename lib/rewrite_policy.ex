@@ -11,11 +11,8 @@ defmodule MRFContrib.RewritePolicy do
 
     content =
       Enum.reduce(filters, content, fn rule, content ->
-        IO.inspect(rule)
-        IO.inspect(content)
         sub(content, rule)
       end)
-      |> IO.inspect
 
     message = put_in(message, ["object", "content"], content)
     {:ok, message}
