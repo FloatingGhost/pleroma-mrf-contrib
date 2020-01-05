@@ -11,8 +11,11 @@ defmodule MRFContrib.RewritePolicy do
 
     content =
       Enum.reduce(filters, content, fn rule, content ->
+        IO.inspect(rule)
+        IO.inspect(content)
         sub(content, rule)
       end)
+      |> IO.inspect
 
     message = put_in(message, ["object", "content"], content)
     {:ok, message}
@@ -31,4 +34,6 @@ defmodule MRFContrib.RewritePolicy do
   def sub(message, {:invidious, instance}) do
     sub(message, {@builtins[:invidious], "#{instance}/watch?v=\\1"})
   end
+
+  def sub(message, _rule), do: message
 end
