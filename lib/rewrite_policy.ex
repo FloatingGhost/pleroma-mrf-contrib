@@ -2,7 +2,7 @@ defmodule MRFContrib.RewritePolicy do
   @behaviour Pleroma.Web.ActivityPub.MRF
 
   @builtins %{
-    invidious: ~r{https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*|https://.*youtu.be/([A-Za-z0-9]+).*}
+    invidious: ~r{href="https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*"|href="https://.*youtu.be/([A-Za-z0-9]+).*"}
   }
 
   @impl true
@@ -32,7 +32,7 @@ defmodule MRFContrib.RewritePolicy do
   end
 
   def sub(message, {:invidious, instance}) do
-    sub(message, {@builtins[:invidious], "#{instance}/watch?v=\\1"})
+    sub(message, {@builtins[:invidious], "href=\"#{instance}/watch?v=\\1\""})
   end
 
   def sub(message, _rule), do: message
