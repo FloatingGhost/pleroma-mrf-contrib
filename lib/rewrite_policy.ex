@@ -1,6 +1,10 @@
 defmodule MRFContrib.RewritePolicy do
   @behaviour Pleroma.Web.ActivityPub.MRF
 
+  @builtins %{
+    invidious: ~r{https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*|https://.*youtu.be/([A-Za-z0-9]+).*}
+  }
+
   @impl true
   def filter(%{"type" => "Create", "object" => %{"content" => content}} = message) do
     filters = Pleroma.Config.get([:mrf_rewrite, :rules], [])
@@ -20,7 +24,11 @@ defmodule MRFContrib.RewritePolicy do
     Regex.replace(from, message, to)
   end
 
-  def sub(message, {from, to}) do
+  def sub(message, {from, to}) when is_binary(from) do
     String.replace(message, from, to)
+  end
+
+  def sub(message, {:invidious, instance}) do
+    sub(message, {@builtins[:invidious], "#{instance}/watch?v=\\1"})
   end
 end
