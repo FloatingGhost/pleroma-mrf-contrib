@@ -1,5 +1,6 @@
 defmodule MRFContrib.RewritePolicy do
   @behaviour Pleroma.Web.ActivityPub.MRF
+  @moduledoc "Rewrite strings (configurable)"
 
   @builtins %{
     invidious: ~r{href="https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*"|href="https://.*youtu.be/([A-Za-z0-9]+).*"}
@@ -33,4 +34,9 @@ defmodule MRFContrib.RewritePolicy do
   end
 
   def sub(message, _rule), do: message
+
+  @impl true
+  def describe do
+    {:ok, %{mrf_rewrite: Pleroma.Config.get(:mrf_rewrite) |> Enum.into(%{})}}
+  end
 end

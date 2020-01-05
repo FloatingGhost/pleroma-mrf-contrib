@@ -9,7 +9,7 @@ Add the following to your pleroma's `mix.exs`
 ```elixir
 def deps do
   [
-    {:mrfcontrib, git: "https://github.com/FloatingGhost/pleroma-mrf-contrib.git", tag: "v0.0.3"}
+    {:mrfcontrib, git: "https://github.com/FloatingGhost/pleroma-mrf-contrib.git", tag: "v0.0.4"}
   ]
 end
 ```
