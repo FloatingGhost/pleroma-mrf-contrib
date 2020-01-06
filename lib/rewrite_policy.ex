@@ -3,7 +3,7 @@ defmodule MRFContrib.RewritePolicy do
   @moduledoc "Rewrite strings (configurable)"
 
   @builtins %{
-    invidious: ~r{href="https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*"|href="https://.*youtu.be/([A-Za-z0-9]+).*"}
+    invidious: ~r{href="https://.*youtube.com/watch?.*v=([A-Za-z0-9]+).*"|href="https://youtu.be/([A-Za-z0-9_]+).*"}
   }
 
   @impl true
@@ -30,7 +30,7 @@ defmodule MRFContrib.RewritePolicy do
   end
 
   def sub(message, {:invidious, instance}) do
-    sub(message, {@builtins[:invidious], "href=\"#{instance}/watch?v=\\1\""})
+    sub(message, {@builtins[:invidious], "href=\"#{instance}/watch?v=\\1\\2\""})
   end
 
   def sub(message, _rule), do: message
