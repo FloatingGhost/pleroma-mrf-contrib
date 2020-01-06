@@ -36,3 +36,13 @@ config :pleroma, :mrf_rewrite,
 So basically your list of rules should consist of a list of tuples of the form illustrated above.
 There are a few special rules you can invoke, the only one currently implemented is `:invidious`
 which will rewrite youtube URLs to the specified invidious instance.
+
+### mrf\_gab\_rewrite
+
+Add silly things to posts originating from gab
+
+```elixir
+# Append MRFContrib.GabRewritePolicy to your policy list
+config :pleroma, :instance,
+  rewrite_policy: [MRFContrib.RewritePolicy]
+```
