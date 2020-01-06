@@ -44,5 +44,5 @@ Add silly things to posts originating from gab
 ```elixir
 # Append MRFContrib.GabRewritePolicy to your policy list
 config :pleroma, :instance,
-  rewrite_policy: [MRFContrib.RewritePolicy]
+  rewrite_policy: [MRFContrib.GabRewritePolicy]
 ```
